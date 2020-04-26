@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="text-h5">
+    <p class="text-h6">
       Headers
     </p>
     <div class="row" v-for="(item, index) in header" :key="index">

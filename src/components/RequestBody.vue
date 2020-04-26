@@ -1,5 +1,6 @@
 <template>
   <div>
+    <p class="text-h6">Body</p>
     <q-markdown :no-line-numbers="$store.getters['displaySettings/getDisableLineNumbers']">
       {{parseDescription(body)}}
     </q-markdown>
