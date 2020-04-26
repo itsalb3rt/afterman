@@ -3,7 +3,7 @@
     <q-chip :color="getColorByMethod(method)" text-color="white">
       {{ method }}
     </q-chip>
-    {{requestName}}
+    <span class="text-bold">{{requestName}}</span>
   </div>
 </template>
 
