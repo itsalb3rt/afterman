@@ -14,11 +14,13 @@ Vue.use(Vuex)
  * with the Store instance.
  */
 import displaySettings from './Modules/DisplaySettings'
+import collection from './Modules/Collection'
 
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      displaySettings
+      displaySettings,
+      collection
     },
 
     // enable strict mode (adds overhead!)
