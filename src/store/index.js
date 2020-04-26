@@ -13,11 +13,14 @@ Vue.use(Vuex)
  * async/await or return a Promise which resolves
  * with the Store instance.
  */
+import displaySettings from './Modules/DisplaySettings'
+import collection from './Modules/Collection'
 
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      // example
+      displaySettings,
+      collection
     },
 
     // enable strict mode (adds overhead!)

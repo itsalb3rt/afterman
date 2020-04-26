@@ -7,13 +7,13 @@
 // https://quasar.dev/quasar-cli/quasar-conf-js
 /* eslint-env node */
 
-module.exports = function (/* ctx */) {
+module.exports = function (ctx) {
   return {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/cli-documentation/boot-files
     boot: [
-
+      'qmarkdown',
       'i18n'
     ],
 
@@ -50,7 +50,11 @@ module.exports = function (/* ctx */) {
       //            (not treeshaking Quasar; biggest bundle size; convenient)
       all: 'auto',
 
-      components: [],
+      components: [
+        'QCard',
+        'QCardSection',
+        'QCardActions'
+      ],
       directives: [],
 
       // Quasar plugins
@@ -66,7 +70,13 @@ module.exports = function (/* ctx */) {
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
-
+      env: ctx.dev
+        ? {
+          APP_VERSION: JSON.stringify('0.3')
+        }
+        : {
+          APP_VERSION: JSON.stringify('0.3')
+        },
       // rtl: false, // https://quasar.dev/options/rtl-support
       // showProgress: false,
       // gzip: true,
