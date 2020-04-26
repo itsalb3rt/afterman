@@ -1,8 +1,8 @@
 <template>
   <div>
     <p class="text-h6">Body</p>
-    <q-markdown :no-line-numbers="$store.getters['displaySettings/getDisableLineNumbers']">
-      {{parseDescription(body)}}
+    <q-markdown v-if="body" :no-line-numbers="$store.getters['displaySettings/getDisableLineNumbers']">
+      {{parseBody(body.raw)}}
     </q-markdown>
   </div>
 </template>
@@ -15,8 +15,8 @@ export default {
     return {}
   },
   methods: {
-    parseDescription (description) {
-      return description.toString()
+    parseBody (body) {
+      return body.toString()
     }
   }
 }
