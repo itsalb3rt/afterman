@@ -3,13 +3,14 @@
     <q-chip :color="getColorByMethod(method)" text-color="white">
       {{ method }}
     </q-chip>
+    {{requestName}}
   </div>
 </template>
 
 <script>
 export default {
   name: 'requestMethod',
-  props: ['method'],
+  props: ['method', 'requestName'],
   data () {
     return {
       colors: [
