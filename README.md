@@ -1,25 +1,39 @@
-# Afterman
+# Afterman :star:
 
-Create beutiful docs in markdown and HTML from postman collection
+Export beutiful docs in Markdown and HTML from postman collection
 
-- No backend
-- No configuration
-- Only HTML, CSS and Javascript (with quasar framework power)
+- No Backend :ghost:
+- No configuration :wrench:
+- Only HTML, CSS and Javascript (**Quasar Framework power**) :tada:
 
+## Rules
 
-## Install the dependencies
+The collection must be exported in version 2.1 and the requests must be organized in folders.
+
+![postman collection demo image](https://i.ibb.co/N37FxYC/Screenshot-2.png)
+
+After this there is nothing else! :smile:
+
+# Get started
+
 ```bash
-npm install
+$ git clone https://github.com/itsalb3rt/afterman.git
 ```
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+### Install the dependencies
 ```bash
-quasar dev
+$ npm install
 ```
 
-### Build the app for production
+#### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
-quasar build
+$ quasar dev
+```
+
+#### Build the app for production
+
+```bash
+$ quasar build
 ```
 
 ### Customize the configuration
