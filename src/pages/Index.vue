@@ -34,47 +34,82 @@
             <display-settings />
           </q-card-section>
           <q-card-section>
-            <div v-for="(item, index) in fileAsJson.item" :key="index">
-              <p class="text-h4">{{ item.name }}</p>
-              <div class="requests">
+            <collection-description
+              :info="this.$store.getters['collection/getCollection'].info"
+              v-if="this.$store.getters['collection/getCollection'].info"
+            />
+          </q-card-section>
+          <q-separator />
+          <q-card-section>
+            <div
+              v-for="(item, index) in this.$store.getters[
+                'collection/getCollection'
+              ].item"
+              :key="index"
+            >
+              <q-separator v-if="index > 0" />
+              <p class="text-h4 q-mt-md">{{ item.name }}</p>
+              <div class="request">
                 <div
-                  class="request"
+                  class="request "
                   v-for="(request, requestKey) in item.item"
                   :key="requestKey"
                 >
+                  <div class="description">
+                    <request-description
+                      :description="request.request.description"
+                    />
+                  </div>
                   <p class="header">
                     <request-header :header="request.request.header" />
                   </p>
-                  <p class="method">
-                    <request-method :method="request.request.method" />
-                    {{ request.name }}
-                  </p>
-                  <p class="url">{{ request.request.url.raw }}</p>
+                  <div class="method">
+                    <request-method
+                      :method="request.request.method"
+                      :request-name="request.name"
+                    />
+                  </div>
+                  <div class="url q-mt-sm q-mb-sm">
+                    <request-url :url="request.request.url.raw" />
+                  </div>
+                  <q-separator class="q-mt-md q-mb-md" />
                   <div class="description">
-                    <request-body :body="request.request.description" />
+                    <request-body :body="request.request.body" />
                   </div>
                 </div>
               </div>
+              <q-separator color="secondary" class="q-mt-md q-mb-md" />
             </div>
           </q-card-section>
-          <pre>
-                {{ fileAsJson.item }}
-          </pre>
         </q-card>
+        <pre>
+          {{ $store.getters["collection/getCollection"] }}
+        </pre>
       </div>
     </div>
   </q-page>
 </template>
 
 <script>
+import collectionDescription from 'src/components/CollectionDescription'
 import requestMethod from 'src/components/RequestMethod'
 import requestHeader from 'src/components/RequestHeader'
 import requestBody from 'src/components/RequestBody'
+import requestDescription from 'src/components/RequestDescription'
+import requestUrl from 'src/components/RequestUrl'
 import displaySettings from 'src/components/DisplaySettings'
 
 export default {
   name: 'PageIndex',
-  components: { requestMethod, requestHeader, requestBody, displaySettings },
+  components: {
+    requestMethod,
+    requestHeader,
+    requestBody,
+    requestDescription,
+    displaySettings,
+    collectionDescription,
+    requestUrl
+  },
   data () {
     return {
       uploadedFile: null,
@@ -89,7 +124,7 @@ export default {
 
       fr.onload = e => {
         const result = JSON.parse(e.target.result)
-        this.fileAsJson = result
+        this.$store.commit('collection/SET_COLLECTION', result)
       }
       fr.readAsText(this.uploadedFile)
     }
