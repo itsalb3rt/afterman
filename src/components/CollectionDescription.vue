@@ -2,7 +2,7 @@
   <div>
     <p class="text-h3 text-center">{{info.name}}</p>
     <q-markdown :no-line-numbers="$store.getters['displaySettings/getDisableLineNumbers']">
-      {{sanitizeInfo(info.description)}}
+{{sanitizeInfo(info.description)}}
     </q-markdown>
   </div>
 </template>
@@ -17,7 +17,7 @@ export default {
   methods: {
     sanitizeInfo (info) {
       if (info) {
-        return info.toString().trim()
+        return info.toString()
       }
     }
   }
