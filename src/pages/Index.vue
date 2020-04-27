@@ -55,27 +55,28 @@
                   v-for="(request, requestKey) in item.item"
                   :key="requestKey"
                 >
-                  <div class="description">
-                    <request-description
-                      :description="request.request.description"
-                    />
-                  </div>
-                  <p class="header">
-                    <request-header :header="request.request.header" />
-                  </p>
-                  <div class="method">
+                  <div class="method q-my-md">
                     <request-method
                       :method="request.request.method"
                       :request-name="request.name"
                     />
                   </div>
-                  <div class="url q-mt-sm q-mb-sm">
+                  <div class="header q-my-md">
+                    <request-header :header="request.request.header" />
+                  </div>
+                  <div class="url q-my-md">
                     <request-url :url="request.request.url.raw" />
                   </div>
+                  <div class="description q-my-md">
+                    <request-description
+                      :description="request.request.description"
+                    />
+                  </div>
                   <q-separator class="q-mt-md q-mb-md" />
-                  <div class="description">
+                  <div class="description q-my-md">
                     <request-body :body="request.request.body" />
                   </div>
+                  <q-separator />
                 </div>
               </div>
               <q-separator color="secondary" class="q-mt-md q-mb-md" />
