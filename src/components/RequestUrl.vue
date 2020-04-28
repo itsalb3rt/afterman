@@ -1,7 +1,9 @@
 <template>
   <div>
     <q-markdown>
-      {{ setUrlVars(url) }}
+```
+{{ setUrlVars(url) }}
+```
     </q-markdown>
   </div>
 </template>
