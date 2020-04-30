@@ -46,7 +46,7 @@
             />
           </q-card-section>
           <q-separator />
-          <q-card-section>
+          <q-card-section v-if="$store.getters['collection/getIsTableContentReady']">
             <div
               v-for="(item, index) in this.$store.getters[
                 'collection/getCollection'
@@ -54,7 +54,7 @@
               :key="index"
             >
               <q-separator v-if="index > 0" />
-              <p class="text-h4 q-mt-md">{{ item.name }}</p>
+              <p class="text-h4 q-mt-md" :id="item.id">{{ item.name }}</p>
               <div class="request">
                 <div
                   class="request "
@@ -65,6 +65,7 @@
                     <request-method
                       :method="request.request.method"
                       :request-name="request.name"
+                      :anchor="request.id"
                     />
                   </div>
                   <div class="header q-my-md">
