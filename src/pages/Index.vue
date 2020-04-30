@@ -1,5 +1,6 @@
 <template>
-  <q-page class="q-pa-md">
+  <q-page class="q-pa-md" id="page-container">
+    <q-scroll-observer @scroll="onScroll" />
     <div class="row q-gutter-sm">
       <div class="col-sm-12 col-md-4">
         <q-card class="import-collection">
@@ -28,11 +29,11 @@
           </q-card-section>
         </q-card>
         <q-card class="q-mt-md">
-        <q-card-section>
-        <table-of-content/>
-        </q-card-section>
+          <q-card-section>
+            {{scrollInfo}}
+            <table-of-content />
+          </q-card-section>
         </q-card>
-
       </div>
       <div class="col-sm-12 col-md-7">
         <q-card>
@@ -46,7 +47,9 @@
             />
           </q-card-section>
           <q-separator />
-          <q-card-section v-if="$store.getters['collection/getIsTableContentReady']">
+          <q-card-section
+            v-if="$store.getters['collection/getIsTableContentReady']"
+          >
             <div
               v-for="(item, index) in this.$store.getters[
                 'collection/getCollection'
@@ -92,6 +95,9 @@
         </q-card>
       </div>
     </div>
+    <q-page-sticky v-if="scrollInfo.position >= 200" position="bottom-right" :offset="[18, 80]">
+      <q-btn to="#page-container" fab icon="arrow_drop_up" color="accent" />
+    </q-page-sticky>
   </q-page>
 </template>
 
@@ -122,7 +128,8 @@ export default {
       uploadedFile: null,
       fileAsJson: {
         item: null
-      }
+      },
+      scrollInfo: {}
     }
   },
   methods: {
@@ -134,6 +141,9 @@ export default {
         this.$store.commit('collection/SET_COLLECTION', result)
       }
       fr.readAsText(this.uploadedFile)
+    },
+    onScroll (info) {
+      this.scrollInfo = info
     }
   }
 }
