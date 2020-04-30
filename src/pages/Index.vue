@@ -30,7 +30,6 @@
         </q-card>
         <q-card class="q-mt-md">
           <q-card-section>
-            {{scrollInfo}}
             <table-of-content />
           </q-card-section>
         </q-card>
