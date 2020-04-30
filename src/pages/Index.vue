@@ -2,7 +2,7 @@
   <q-page class="q-pa-md">
     <div class="row q-gutter-sm">
       <div class="col-sm-12 col-md-4">
-        <q-card class="my-card">
+        <q-card class="import-collection">
           <q-card-section>
             <p>
               Upload the postman collection file here in
@@ -27,6 +27,12 @@
             </q-file>
           </q-card-section>
         </q-card>
+        <q-card class="q-mt-md">
+        <q-card-section>
+        <table-of-content/>
+        </q-card-section>
+        </q-card>
+
       </div>
       <div class="col-sm-12 col-md-7">
         <q-card>
@@ -83,9 +89,6 @@
             </div>
           </q-card-section>
         </q-card>
-        <pre>
-          {{ $store.getters["collection/getCollection"] }}
-        </pre>
       </div>
     </div>
   </q-page>
@@ -99,6 +102,7 @@ import requestBody from 'src/components/RequestBody'
 import requestDescription from 'src/components/RequestDescription'
 import requestUrl from 'src/components/RequestUrl'
 import displaySettings from 'src/components/DisplaySettings'
+import tableOfContent from 'src/components/TableOfContent'
 
 export default {
   name: 'PageIndex',
@@ -109,7 +113,8 @@ export default {
     requestDescription,
     displaySettings,
     collectionDescription,
-    requestUrl
+    requestUrl,
+    tableOfContent
   },
   data () {
     return {

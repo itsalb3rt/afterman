@@ -2,7 +2,7 @@ export default {
   namespaced: true,
   state: {
     collection: {
-      item: null, // All request
+      item: [], // All request
       variable: [] // Collection variables used, for example in URL
     }
   },

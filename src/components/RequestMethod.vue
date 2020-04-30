@@ -3,7 +3,7 @@
     <q-chip :color="getColorByMethod(method)" text-color="white">
       {{ method }}
     </q-chip>
-    <span class="text-bold">{{requestName}}</span>
+    <span class="text-bold" :id="`${requestName.replace(/[^a-z0-9A-Z]/g, '')}${method}`">{{requestName}}</span>
   </div>
 </template>
 
