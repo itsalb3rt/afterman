@@ -10,17 +10,20 @@
             >
             <q-list separator>
               <q-item
-                clickable
                 v-for="(child, key) in item.children"
                 :key="key"
               >
-                <q-chip :color="getColorByMethod(child.method)" text-color="white" size="10px">{{ child.method }}</q-chip>
-
-                <q-item-section
-                  ><a class="item primary" :href="`#${child.anchor}`">{{
-                    child.label
-                  }}</a></q-item-section
+                <q-chip
+                  :color="getColorByMethod(child.method)"
+                  text-color="white"
+                  size="10px"
+                  >{{ child.method }}</q-chip
                 >
+                <q-item-section>
+                  <a class="item primary" :href="`#${child.anchor}`">
+                    {{ child.label }}
+                  </a>
+                </q-item-section>
               </q-item>
             </q-list>
           </q-item-section>
@@ -88,5 +91,9 @@ export default {
 <style lang="css">
 .tree a.item {
   text-decoration: none;
+  color: var(--q-color-dark);
+}
+.tree a.item:hover{
+  text-decoration: underline;
 }
 </style>
