@@ -5,27 +5,34 @@
       <q-list class="tree" separator>
         <q-item v-for="(item, index) in tableOfContent" :key="index">
           <q-item-section class="text-capitalize" style="display:inline-block">
-            <q-icon :name="item.icon" /><span class="text-bold">
-              {{ item.label }}</span
-            >
+            <q-icon size="18px" :name="item.icon" />
+            <span class="text-bold">
+              <a class="item text-capitalize" :href="'#'+((item.id)? `${item.id}`: '')"> - {{ item.label }}</a>
+              </span>
             <q-list separator>
               <q-item
-                clickable
                 v-for="(child, key) in item.children"
                 :key="key"
               >
-                <q-chip :color="getColorByMethod(child.method)" text-color="white" size="10px">{{ child.method }}</q-chip>
-
-                <q-item-section
-                  ><a class="item primary" :href="`#${child.anchor}`">{{
-                    child.label
-                  }}</a></q-item-section
+                <q-chip
+                  :color="getColorByMethod(child.method)"
+                  text-color="white"
+                  size="10px"
+                  >{{ child.method }}</q-chip
                 >
+                <q-item-section>
+                  <a class="item primary" :href="`#${child.id}`">
+                    {{ child.label }}
+                  </a>
+                </q-item-section>
               </q-item>
             </q-list>
           </q-item-section>
         </q-item>
       </q-list>
+      <div v-if="tableOfContent.length > 0">
+        {{setTableContentReady()}}
+      </div>
     </div>
   </div>
 </template>
@@ -52,6 +59,13 @@ export default {
         color => color.method === method.toUpperCase()
       )
       return result.value
+    },
+    setTableContentReady () {
+      /**
+       * Hack for active the main content view, this wait for the coneten loading
+       * and used the new properties
+       */
+      this.$store.commit('collection/SET_TABLE_CONTENT_READY', true)
     }
   },
   computed: {
@@ -59,8 +73,12 @@ export default {
       const result = []
       this.$store.getters['collection/getCollection'].item.forEach(
         (element, index) => {
+          // Create a unique Id for use the anchors
+          element.id = uniqid()
+
           const currentKey = element.name.toString().toLowerCase()
           result[index] = {
+            id: element.id,
             label: currentKey,
             children: [],
             anchor: currentKey + 'anchor',
@@ -68,14 +86,14 @@ export default {
           }
 
           element.item.forEach(request => {
+            // Create a unique Id for use the anchors in content table
+            request.id = uniqid()
+
             result[index].children.push({
-              key: uniqid(),
+              id: request.id,
               originalKey: request.name.replace(/[^a-z0-9A-Z]/g, ''),
               label: request.name,
-              method: request.request.method,
-              anchor:
-                request.name.replace(/[^a-z0-9A-Z]/g, '') +
-                request.request.method
+              method: request.request.method
             })
           })
         }
@@ -88,5 +106,9 @@ export default {
 <style lang="css">
 .tree a.item {
   text-decoration: none;
+  color: var(--q-color-dark);
+}
+.tree a.item:hover{
+  text-decoration: underline;
 }
 </style>

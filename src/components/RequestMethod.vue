@@ -3,14 +3,14 @@
     <q-chip :color="getColorByMethod(method)" text-color="white">
       {{ method }}
     </q-chip>
-    <span class="text-bold" :id="`${requestName.replace(/[^a-z0-9A-Z]/g, '')}${method}`">{{requestName}}</span>
+    <span class="text-bold" :id.sync="anchor">{{requestName}}</span>
   </div>
 </template>
 
 <script>
 export default {
   name: 'requestMethod',
-  props: ['method', 'requestName'],
+  props: ['method', 'requestName', 'anchor'],
   data () {
     return {
       colors: [
