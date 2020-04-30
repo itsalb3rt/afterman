@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="text-h5">Table of content</p>
+    <p class="text-h5" v-if="tableOfContent.length > 0">Table of content</p>
     <div>
       <q-list class="tree" separator>
         <q-item v-for="(item, index) in tableOfContent" :key="index">
