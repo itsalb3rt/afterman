@@ -1,7 +1,7 @@
 export default {
   namespaced: true,
   state: {
-    disableLineNumbers: false
+    disableLineNumbers: true
   },
   getters: {
     getDisableLineNumbers (state) {
