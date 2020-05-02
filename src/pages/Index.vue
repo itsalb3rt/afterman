@@ -26,19 +26,24 @@
                 <q-icon name="cloud_upload" @click.stop />
               </template>
             </q-file>
+            <div class="q-mt-md" v-if="$store.getters['collection/getIsTableContentReady']">
+            <q-btn
+              color="primary"
+              label="Download in HTML"
+              icon="code"
+              @click="downloadHtml()"
+            />
+            </div>
           </q-card-section>
         </q-card>
         <q-card class="q-mt-md">
-          <q-card-section>
+          <q-card-section class="table-of-content">
             <table-of-content />
           </q-card-section>
         </q-card>
       </div>
       <div class="col-sm-12 col-md-7">
-        <q-card>
-          <q-card-section>
-            <display-settings />
-          </q-card-section>
+        <q-card class="collection-content">
           <q-card-section>
             <collection-description
               :info="this.$store.getters['collection/getCollection'].info"
@@ -94,7 +99,12 @@
         </q-card>
       </div>
     </div>
-    <q-page-sticky v-if="scrollInfo.position >= 200" position="bottom-right" :offset="[18, 80]">
+    <display-settings />
+    <q-page-sticky
+      v-if="scrollInfo.position >= 200"
+      position="bottom-right"
+      :offset="[18, 80]"
+    >
       <q-btn to="#page-container" fab icon="arrow_drop_up" color="accent" />
     </q-page-sticky>
   </q-page>
@@ -143,6 +153,71 @@ export default {
     },
     onScroll (info) {
       this.scrollInfo = info
+    },
+    downloadHtml () {
+      const tableOfContent = document.querySelector('.table-of-content')
+        .outerHTML
+      const collectionContent = document.querySelector('.collection-content')
+        .outerHTML
+      const fileName = 'collection.html'
+      const css = this.extractCss()
+      const text = this.constructHtmlStrucuteForDownload(css, tableOfContent, collectionContent)
+
+      // creating an invisible element
+      const element = document.createElement('a')
+      element.setAttribute(
+        'href',
+        'data:text/plain;charset=utf-8, ' + encodeURIComponent(text)
+      )
+      element.setAttribute('download', fileName)
+      // the above code is equivalent to
+      // <a href="path of file" download="file name">
+
+      document.body.appendChild(element)
+      element.click()
+      document.body.removeChild(element)
+    },
+    constructHtmlStrucuteForDownload (css, tableOfContent, collectionContent) {
+      const html = `
+      <html>
+        <body>
+          <style>${css}</style>
+          <main class="q-page q-pa-md">
+            <div class="row">
+              <div class="col-sm-12 col-md-3">
+                ${tableOfContent}
+              </div>
+              <div class="col-sm-12 col-md-9">
+                ${collectionContent}
+              </div>
+            </div>
+          </main>
+        </body>
+      </html>
+      `
+      return html
+    },
+    extractCss () {
+      const css = []
+      for (let i = 0; i < document.styleSheets.length; i++) {
+        const sheet = document.styleSheets[i]
+        const rules = 'cssRules' in sheet ? sheet.cssRules : sheet.rules
+        if (rules) {
+          css.push(
+            '\n/* Stylesheet : ' + (sheet.href || '[inline styles]') + ' */'
+          )
+          for (let j = 0; j < rules.length; j++) {
+            const rule = rules[j]
+            if ('cssText' in rule) css.push(rule.cssText)
+            else {
+              css.push(
+                rule.selectorText + ' {\n' + rule.style.cssText + '\n}\n'
+              )
+            }
+          }
+        }
+      }
+      return css.join('\n') + '\n'
     }
   }
 }
