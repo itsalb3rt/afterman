@@ -26,7 +26,7 @@
                 <q-icon name="cloud_upload" @click.stop />
               </template>
             </q-file>
-            <div class="q-mt-md" v-if="$store.getters['collection/getIsTableContentReady']">
+            <div class="q-mt-md" v-if="getIsTableContentReady">
             <div class="q-my-md">
               <q-btn
               color="primary"
