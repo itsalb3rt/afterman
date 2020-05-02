@@ -26,5 +26,9 @@ export default function (/* { store, ssrContext } */) {
     base: process.env.VUE_ROUTER_BASE
   })
 
+  Router.afterEach((to, from) => {
+    document.title = 'Afterman App'
+  })
+
   return Router
 }
