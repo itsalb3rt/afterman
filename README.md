@@ -7,6 +7,12 @@ Export beutiful docs in **Markdown** and **HTML** from postman collection
 - :fire: customize the output of your documentation *(Include Dark mode)*
 - :tada: Only HTML, CSS and Javascript (**Quasar Framework power**)
 
+## Table of content
+
+- [Rules](#Rules)
+- [Get started](#get-started)
+- [Tools for build this Web App](#tools)
+
 ## Rules
 
 The collection must be exported in version 2.1 and the requests must be organized in folders.
@@ -43,7 +49,9 @@ $ quasar build
 
 ## Tools
 
-- Quasar Framework  https://quasar.dev/
-- QMarkdown extension https://quasarframework.github.io/quasar-ui-qmarkdown/examples
-- UniqId https://www.npmjs.com/package/uniqid
+Made with the :heart: and of course with these great tools
+
+- Quasar Framework  https://github.com/quasarframework/quasar
+- QMarkdown extension https://github.com/quasarframework/quasar-ui-qmarkdown
+- UniqId https://github.com/adamhalasz/uniqid
 - Turndown https://github.com/domchristie/turndown
