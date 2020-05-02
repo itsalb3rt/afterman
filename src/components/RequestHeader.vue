@@ -1,8 +1,8 @@
 <template>
   <div>
-    <p class="text-h6">
+    <h4 class="text-h6 q-my-sx">
       Headers
-    </p>
+    </h4>
     <div class="row" v-for="(item, index) in header" :key="index">
       <div class="col-3 text-bold">{{ item.key }}</div>
       <div class="col-9">{{ item.value }}</div>

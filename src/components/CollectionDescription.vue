@@ -1,6 +1,6 @@
 <template>
   <div>
-    <p class="text-h3 text-center">{{info.name}}</p>
+    <h1 class="text-h3 text-center q-my-md">{{info.name}}</h1>
     <q-markdown :no-line-numbers="$store.getters['displaySettings/getDisableLineNumbers']">
 {{sanitizeInfo(info.description)}}
     </q-markdown>

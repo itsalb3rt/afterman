@@ -27,12 +27,22 @@
               </template>
             </q-file>
             <div class="q-mt-md" v-if="$store.getters['collection/getIsTableContentReady']">
-            <q-btn
+            <div class="q-my-md">
+              <q-btn
               color="primary"
               label="Download in HTML"
               icon="code"
               @click="downloadHtml()"
             />
+            </div>
+            <div>
+              <q-btn
+              color="primary"
+              label="Download in Markdown"
+              icon="description"
+              @click="downloadMarkdown()"
+            />
+            </div>
             </div>
           </q-card-section>
         </q-card>
@@ -61,7 +71,7 @@
               :key="index"
             >
               <q-separator v-if="index > 0" />
-              <p class="text-h4 q-mt-md" :id="item.id">{{ item.name }}</p>
+              <h2 class="text-h4 q-mt-md q-mb-xs" :id="item.id">{{ item.name }}</h2>
               <div class="request">
                 <div
                   class="request "
@@ -119,6 +129,7 @@ import requestDescription from 'src/components/RequestDescription'
 import requestUrl from 'src/components/RequestUrl'
 import displaySettings from 'src/components/DisplaySettings'
 import tableOfContent from 'src/components/TableOfContent'
+import TurndownService from 'turndown'
 
 export default {
   name: 'PageIndex',
@@ -138,7 +149,13 @@ export default {
       fileAsJson: {
         item: null
       },
-      scrollInfo: {}
+      scrollInfo: {},
+      methodsColors: [
+        { method: 'POST', value: '#1976D2' },
+        { method: 'GET', value: '#21BA45' },
+        { method: 'PATCH', value: '#9e9e9e' },
+        { method: 'DELETE', value: '#C10015' }
+      ]
     }
   },
   methods: {
@@ -166,20 +183,105 @@ export default {
     onScroll (info) {
       this.scrollInfo = info
     },
+    downloadMarkdown () {
+      const turndownService = new TurndownService()
+
+      /**
+      * format a table of content list
+      */
+      turndownService.addRule('rootList', {
+        filter: (node, options) => node.classList.contains('root-list-item'),
+
+        replacement: (content, node, options) => `- ${content.replace(/\n/g, '')} <br/>`
+      })
+      /**
+      * format a table of content list
+      */
+      turndownService.addRule('childList', {
+        filter: (node, options) => node.classList.contains('child-list-item'),
+
+        replacement: (content, node, options) => `\t - ${content.replace(/\n/g, '')} <br/>`.replace('[', ' [')
+      })
+
+      /**
+      * Convert the method chips to in line element and
+      * added a bold text
+      */
+      turndownService.addRule('chipsMethods', {
+        filter: (node, options) => node.classList.contains('request-method'),
+
+        replacement: (content, node, options) =>
+            `<strong style="color:${this.getMethodColor(content)}">` + content.replace(/\n/g, '') + '</strong> - '
+      })
+
+      /**
+       * Keep the html tag headers for use anchors
+       */
+      turndownService.addRule('keepHeadersTags', {
+        filter: (node, options) => {
+          return (
+            node.nodeName === 'H2'
+          )
+        },
+
+        replacement: (content, node, options) => node.outerHTML
+      })
+
+      /**
+      * Keep HTML tag for request methods for use anchors
+      */
+      turndownService.addRule('keepRequestMethodTags', {
+
+        filter: (node, options) => {
+          return (
+            node.classList.contains('request-name')
+          )
+        },
+
+        replacement: (content, node, options) => node.outerHTML
+      })
+
+      const { tableOfContent, collectionContent } = this.getContentCollection()
+      const content = this.constructHtmlStrucuteForDownload('', tableOfContent, collectionContent)
+      const fileName = 'README.md'
+
+      var markdown = turndownService.turndown(content)
+      this.downloadFile(fileName, markdown)
+    },
+    getMethodColor (method) {
+      method = method.replace(/\n/g, '').trim()
+      const result = this.methodsColors.find(color => color.method === method.toUpperCase())
+      return result.value
+    },
     downloadHtml () {
+      const { tableOfContent, collectionContent, css } = this.getContentCollection()
+      const fileName = 'collection.html'
+      const content = this.constructHtmlStrucuteForDownload(css, tableOfContent, collectionContent)
+
+      this.downloadFile(fileName, content)
+    },
+    getContentCollection () {
+      /**
+       * Return HTML as string
+       **/
       const tableOfContent = document.querySelector('.table-of-content')
         .outerHTML
       const collectionContent = document.querySelector('.collection-content')
         .outerHTML
-      const fileName = 'collection.html'
       const css = this.extractCss()
-      const text = this.constructHtmlStrucuteForDownload(css, tableOfContent, collectionContent)
+
+      return { tableOfContent, collectionContent, css }
+    },
+    downloadFile (fileName, content) {
+      /**
+       * Make a string downloable, the file extension come in with the fileName param
+       */
 
       // creating an invisible element
       const element = document.createElement('a')
       element.setAttribute(
         'href',
-        'data:text/plain;charset=utf-8, ' + encodeURIComponent(text)
+        'data:text/plain;charset=utf-8, ' + encodeURIComponent(content)
       )
       element.setAttribute('download', fileName)
       // the above code is equivalent to
@@ -190,6 +292,9 @@ export default {
       document.body.removeChild(element)
     },
     constructHtmlStrucuteForDownload (css, tableOfContent, collectionContent) {
+      /**
+       * Create a logic HTML structure as string for make a downloable file
+       */
       const bodyClasses = document.querySelector('body').classList
       const html = `
       <html>
