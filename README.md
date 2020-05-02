@@ -17,6 +17,7 @@ Export beutiful docs in **Markdown** and **HTML** from postman collection
 
 - [Rules](#Rules)
 - [Get started](#get-started)
+- [Docker](#docker)
 - [Tools for build this Web App](#tools)
 
 ## Rules
@@ -50,6 +51,19 @@ $ quasar dev
 ```bash
 $ quasar build
 ```
+---
+
+## Docker
+
+```bash
+$ docker build -t afterman .
+```
+
+```bash
+$ docker run -it -p 800:80 --rm dockerize-quasar
+```
+
+We should now be able to access the application on [http://localhost:8000](http://localhost:8000)
 
 ---
 
