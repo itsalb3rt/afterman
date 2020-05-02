@@ -1,29 +1,35 @@
 <template>
   <div>
-    <p class="text-h5" v-if="tableOfContent.length > 0">Table of content</p>
+    <h2 class="text-h5 q-my-md" v-if="tableOfContent.length > 0">Table of content</h2>
     <div>
       <q-list class="tree" separator>
         <q-item v-for="(item, index) in tableOfContent" :key="index">
           <q-item-section class="text-capitalize" style="display:inline-block">
-            📁
-            <span class="text-bold">
-              <a class="item text-capitalize" :href="'#'+((item.id)? `${item.id}`: '')"> - {{ item.label }}</a>
-              </span>
-            <q-list separator>
-              <q-item
-                v-for="(child, key) in item.children"
-                :key="key"
-              >
-                <q-chip
-                  :color="getColorByMethod(child.method)"
-                  text-color="white"
-                  size="10px"
-                  >{{ child.method }}</q-chip
+            <span class="root-list-item">
+              📁
+              <span class="text-bold">
+                <a
+                  class="item text-capitalize"
+                  :href="'#' + (item.id ? `${item.id}` : '')"
                 >
+                  - {{ item.label }}</a
+                >
+              </span>
+            </span>
+            <q-list separator>
+              <q-item v-for="(child, key) in item.children" :key="key">
                 <q-item-section>
-                  <a class="item primary" :href="`#${child.id}`">
-                    {{ child.label }}
-                  </a>
+                  <span class="child-list-item">
+                    <q-chip
+                      :color="getColorByMethod(child.method)"
+                      text-color="white"
+                      size="10px"
+                      >{{ child.method }}</q-chip
+                      >
+                    <a class="item primary" :href="`#${child.id}`">
+                      {{ child.label }}
+                    </a>
+                  </span>
                 </q-item-section>
               </q-item>
             </q-list>
@@ -31,7 +37,7 @@
         </q-item>
       </q-list>
       <div v-if="tableOfContent.length > 0">
-        {{setTableContentReady()}}
+        {{ setTableContentReady() }}
       </div>
     </div>
   </div>
@@ -108,7 +114,7 @@ export default {
   text-decoration: none;
   color: $grey-14;
 }
-.tree a.item:hover{
+.tree a.item:hover {
   text-decoration: underline;
 }
 </style>
