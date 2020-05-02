@@ -234,10 +234,8 @@ export default {
       const { tableOfContent, collectionContent } = this.getContentCollection()
       const content = this.constructHtmlStrucuteForDownload('', tableOfContent, collectionContent)
       const fileName = 'README.md'
-      console.log('downloadMarkdown -> fileName', fileName)
 
       var markdown = turndownService.turndown(content)
-      console.log('downloadMarkdown -> markdown', markdown)
       this.downloadFile(fileName, markdown)
     },
     getMethodColor (method) {
