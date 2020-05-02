@@ -1,9 +1,9 @@
 <template>
   <div>
-    <q-chip :color="getColorByMethod(method)" text-color="white">
+    <q-chip class="request-method" :color="getColorByMethod(method)" text-color="white">
       {{ method }}
     </q-chip>
-    <span class="text-bold" :id.sync="anchor">{{requestName}}</span>
+    <strong class="text-bold request-name" :id.sync="anchor">{{requestName}}</strong>
   </div>
 </template>
 
