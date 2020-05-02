@@ -1,4 +1,4 @@
-# Afterman :star:
+# ![Mars](https://i.ibb.co/RQvDFQP/astronomy.png) Afterman
 
 Export beutiful docs in **Markdown** and **HTML** from postman collection
 
@@ -15,7 +15,9 @@ The collection must be exported in version 2.1 and the requests must be organize
 
 After this there is nothing else! :smile:
 
-# Get started
+---
+
+## Get started
 
 ```bash
 $ git clone https://github.com/itsalb3rt/afterman.git
@@ -37,5 +39,11 @@ $ quasar dev
 $ quasar build
 ```
 
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+---
+
+## Tools
+
+- Quasar Framework  https://quasar.dev/
+- QMarkdown extension https://quasarframework.github.io/quasar-ui-qmarkdown/examples
+- UniqId https://www.npmjs.com/package/uniqid
+- Turndown https://github.com/domchristie/turndown
