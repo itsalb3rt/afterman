@@ -19,7 +19,7 @@
               standout
               @input="parseJsonFile()"
               v-model="uploadedFile"
-              label="Upload JSON"
+              label="Import JSON"
               accept=".json"
             >
               <template v-slot:prepend>
