@@ -46,7 +46,7 @@
             </div>
           </q-card-section>
         </q-card>
-        <q-card class="table-of-content">
+        <q-card v-if="getCollection.item.length" class="table-of-content">
           <q-card-section>
             <table-of-content />
           </q-card-section>
@@ -56,18 +56,16 @@
         <q-card class="collection-content">
           <q-card-section>
             <collection-description
-              :info="this.$store.getters['collection/getCollection'].info"
-              v-if="this.$store.getters['collection/getCollection'].info"
+              :info="getCollection.info"
+              v-if="getCollection.info"
             />
           </q-card-section>
           <q-separator />
           <q-card-section
-            v-if="$store.getters['collection/getIsTableContentReady']"
+            v-if="getIsTableContentReady"
           >
             <div
-              v-for="(item, index) in this.$store.getters[
-                'collection/getCollection'
-              ].item"
+              v-for="(item, index) in getCollection.item"
               :key="index"
             >
               <q-separator v-if="index > 0" />
@@ -121,6 +119,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import collectionDescription from 'src/components/CollectionDescription'
 import requestMethod from 'src/components/RequestMethod'
 import requestHeader from 'src/components/RequestHeader'
@@ -158,10 +157,17 @@ export default {
       ]
     }
   },
+  computed: {
+    ...mapGetters({
+      getCollectionModel: 'collection/getCollectionModel',
+      getIsTableContentReady: 'collection/getIsTableContentReady',
+      getCollection: 'collection/getCollection'
+    })
+  },
   methods: {
     parseJsonFile () {
       this.$q.loading.show()
-      this.$store.commit('collection/SET_COLLECTION', this.$store.getters['collection/getCollectionModel'])
+      this.$store.commit('collection/SET_COLLECTION', this.getCollectionModel)
       setTimeout(() => {
         const fr = new FileReader()
         fr.onload = e => {
@@ -177,7 +183,7 @@ export default {
     validatedCollection () {
       if (!this.$store.getters['collection/isValid']) {
         this.$q.notify({ message: 'Invalid Collection', position: 'top', color: 'negative' })
-        this.$store.commit('collection/SET_COLLECTION', this.$store.getters['collection/getCollectionModel'])
+        this.$store.commit('collection/SET_COLLECTION', this.getCollectionModel)
       }
     },
     onScroll (info) {
