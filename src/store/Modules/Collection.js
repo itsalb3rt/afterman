@@ -33,7 +33,6 @@ export default {
       return state.model
     },
     isValid (state) {
-      console.log(state.collection.info.schema)
       return (state.collection.info.schema === 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json')
     }
   },
