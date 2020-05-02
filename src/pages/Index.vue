@@ -143,13 +143,18 @@ export default {
   },
   methods: {
     parseJsonFile () {
-      const fr = new FileReader()
+      this.$q.loading.show()
 
-      fr.onload = e => {
-        const result = JSON.parse(e.target.result)
-        this.$store.commit('collection/SET_COLLECTION', result)
-      }
-      fr.readAsText(this.uploadedFile)
+      setTimeout(() => {
+        const fr = new FileReader()
+        fr.onload = e => {
+          const result = JSON.parse(e.target.result)
+          this.$store.commit('collection/SET_COLLECTION', result)
+          this.$q.loading.hide()
+        }
+
+        fr.readAsText(this.uploadedFile)
+      }, 500)
     },
     onScroll (info) {
       this.scrollInfo = info
