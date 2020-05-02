@@ -103,10 +103,10 @@ export default {
   }
 }
 </script>
-<style lang="css">
+<style lang="scss">
 .tree a.item {
   text-decoration: none;
-  color: var(--q-color-dark);
+  color: $grey-14;
 }
 .tree a.item:hover{
   text-decoration: underline;
