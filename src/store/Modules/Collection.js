@@ -1,7 +1,19 @@
 export default {
   namespaced: true,
   state: {
+    collectionModel: {
+      // Used for reset collection object only
+
+      info: { // the information object
+        schema: ''
+      },
+      item: [], // All request
+      variable: [] // Collection variables used, for example in URL
+    },
     collection: {
+      info: { // the information object
+        schema: ''
+      },
       item: [], // All request
       variable: [] // Collection variables used, for example in URL
     },
@@ -16,6 +28,13 @@ export default {
     },
     getIsTableContentReady (state) {
       return state.isTableContentReady
+    },
+    getCollectionModel (state) {
+      return state.model
+    },
+    isValid (state) {
+      console.log(state.collection.info.schema)
+      return (state.collection.info.schema === 'https://schema.getpostman.com/json/collection/v2.1.0/collection.json')
     }
   },
   mutations: {
