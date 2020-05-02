@@ -71,7 +71,7 @@
               :key="index"
             >
               <q-separator v-if="index > 0" />
-              <p class="text-h4 q-mt-md" :id="item.id">{{ item.name }}</p>
+              <h2 class="text-h4 q-mt-md q-mb-xs" :id="item.id">{{ item.name }}</h2>
               <div class="request">
                 <div
                   class="request "
@@ -149,7 +149,13 @@ export default {
       fileAsJson: {
         item: null
       },
-      scrollInfo: {}
+      scrollInfo: {},
+      methodsColors: [
+        { method: 'POST', value: '#1976D2' },
+        { method: 'GET', value: '#21BA45' },
+        { method: 'PATCH', value: '#9e9e9e' },
+        { method: 'DELETE', value: '#C10015' }
+      ]
     }
   },
   methods: {
@@ -178,13 +184,66 @@ export default {
       this.scrollInfo = info
     },
     downloadMarkdown () {
-      var turndownService = new TurndownService()
+      const turndownService = new TurndownService()
+
+      /**
+      * Convert the method chips to in line element and
+      * added a bold text
+      */
+      turndownService.addRule('chipsMethods', {
+        filter: (node, options) => {
+          return (
+            node.classList.contains('request-method')
+          )
+        },
+
+        replacement: (content, node, options) => {
+          return (
+            `<strong style="color:${this.getMethodColor(content)}">` + content.replace(/\n/g, '') + '</strong> - '
+          )
+        }
+      })
+
+      /**
+       * Keep the html tag headers for use anchors
+       */
+      turndownService.addRule('keepHeadersTags', {
+        filter: (node, options) => {
+          return (
+            node.nodeName === 'H2'
+          )
+        },
+
+        replacement: (content, node, options) => node.outerHTML
+      })
+
+      /**
+      * Keep HTML tag for request methods for use anchors
+      */
+      turndownService.addRule('keepRequestMethodTags', {
+
+        filter: (node, options) => {
+          return (
+            node.classList.contains('request-name')
+          )
+        },
+
+        replacement: (content, node, options) => node.outerHTML
+      })
+
       const { tableOfContent, collectionContent } = this.getContentCollection()
       const content = this.constructHtmlStrucuteForDownload('', tableOfContent, collectionContent)
       const fileName = 'README.md'
+      console.log('downloadMarkdown -> fileName', fileName)
 
       var markdown = turndownService.turndown(content)
+      console.log('downloadMarkdown -> markdown', markdown)
       this.downloadFile(fileName, markdown)
+    },
+    getMethodColor (method) {
+      method = method.replace(/\n/g, '').trim()
+      const result = this.methodsColors.find(color => color.method === method.toUpperCase())
+      return result.value
     },
     downloadHtml () {
       const { tableOfContent, collectionContent, css } = this.getContentCollection()
