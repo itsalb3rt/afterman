@@ -180,6 +180,9 @@ export default {
     constructHtmlStrucuteForDownload (css, tableOfContent, collectionContent) {
       const html = `
       <html>
+        <head>
+        <meta charset="UTF-8">
+        </head>
         <body>
           <style>${css}</style>
           <main class="q-page q-pa-md">
