@@ -2,7 +2,7 @@
   <div>
     <p class="text-h6">Description</p>
     <q-markdown :no-line-numbers="$store.getters['displaySettings/getDisableLineNumbers']">
-{{parseDescription(description)}}
+{{description}}
     </q-markdown>
   </div>
 </template>
@@ -13,11 +13,6 @@ export default {
   props: ['description'],
   data () {
     return {}
-  },
-  methods: {
-    parseDescription (description) {
-      return description
-    }
   }
 }
 </script>
