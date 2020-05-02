@@ -72,10 +72,10 @@ module.exports = function (ctx) {
       vueRouterMode: 'hash', // available values: 'hash', 'history'
       env: ctx.dev
         ? {
-          APP_VERSION: JSON.stringify('0.3')
+          APP_VERSION: JSON.stringify('0.6.2')
         }
         : {
-          APP_VERSION: JSON.stringify('0.3')
+          APP_VERSION: JSON.stringify('0.6.2')
         },
       // rtl: false, // https://quasar.dev/options/rtl-support
       // showProgress: false,
