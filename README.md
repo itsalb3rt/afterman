@@ -7,6 +7,8 @@ Export beutiful docs in **Markdown** and **HTML** from postman collection
 - :fire: customize the output of your documentation *(Include Dark mode)*
 - :tada: Only HTML, CSS and Javascript (**Quasar Framework power**)
 
+>> Note: The tool covers the basic options of a collection, variables, description, headers, body, routes, as needs arise more things will be added.
+
 ## Table of content
 
 - [Rules](#Rules)
