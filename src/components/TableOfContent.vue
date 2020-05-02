@@ -5,7 +5,7 @@
       <q-list class="tree" separator>
         <q-item v-for="(item, index) in tableOfContent" :key="index">
           <q-item-section class="text-capitalize" style="display:inline-block">
-            <q-icon size="18px" :name="item.icon" />
+            📁
             <span class="text-bold">
               <a class="item text-capitalize" :href="'#'+((item.id)? `${item.id}`: '')"> - {{ item.label }}</a>
               </span>
@@ -103,10 +103,10 @@ export default {
   }
 }
 </script>
-<style lang="css">
+<style lang="scss">
 .tree a.item {
   text-decoration: none;
-  color: var(--q-color-dark);
+  color: $grey-14;
 }
 .tree a.item:hover{
   text-decoration: underline;

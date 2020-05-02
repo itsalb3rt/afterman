@@ -1,6 +1,6 @@
 {
   "name": "afterman",
-  "version": "0.0.1",
+  "version": "0.6.2",
   "description": "Convert postman collection in Markdown or HTML file",
   "productName": "Quasar App",
   "cordovaId": "org.cordova.quasar.app",

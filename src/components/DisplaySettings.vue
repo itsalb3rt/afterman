@@ -23,6 +23,13 @@
             ></q-toggle>
           </div>
           <div>
+            <q-toggle
+              @input="darkMode()"
+              v-model="toggleDarkMode"
+              label="Dark Mode"
+            ></q-toggle>
+          </div>
+          <div>
             <q-separator class="q-my-md" />
           </div>
           <div>
@@ -62,12 +69,14 @@ export default {
     this.toggleLineNumbers = this.$store.getters[
       'displaySettings/getDisableLineNumbers'
     ]
+    this.toggleDarkMode = this.$q.dark.isActive
   },
   data () {
     return {
       toggleDialog: false,
       toggleLineNumbers: false,
-      displayRaw: false
+      displayRaw: false,
+      toggleDarkMode: false
     }
   },
   methods: {
@@ -76,6 +85,9 @@ export default {
         'displaySettings/SET_DISABLE_LINE_NUMBER',
         this.toggleLineNumbers
       )
+    },
+    darkMode () {
+      this.$q.dark.set(this.toggleDarkMode)
     }
   }
 }

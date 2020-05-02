@@ -1,10 +1,11 @@
 # Afterman :star:
 
-Export beutiful docs in Markdown and HTML from postman collection
+Export beutiful docs in **Markdown** and **HTML** from postman collection
 
-- No Backend :ghost:
-- No configuration :wrench:
-- Only HTML, CSS and Javascript (**Quasar Framework power**) :tada:
+- :ghost: No Backend
+- :wrench: No configuration
+- :fire: customize the output of your documentation *(Include Dark mode)*
+- :tada: Only HTML, CSS and Javascript (**Quasar Framework power**)
 
 ## Rules
 
