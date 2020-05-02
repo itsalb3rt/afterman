@@ -144,7 +144,7 @@ export default {
   methods: {
     parseJsonFile () {
       this.$q.loading.show()
-
+      this.$store.commit('collection/SET_COLLECTION', this.$store.getters['collection/getCollectionModel'])
       setTimeout(() => {
         const fr = new FileReader()
         fr.onload = e => {
