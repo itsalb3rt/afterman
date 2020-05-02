@@ -187,21 +187,31 @@ export default {
       const turndownService = new TurndownService()
 
       /**
+      * format a table of content list
+      */
+      turndownService.addRule('rootList', {
+        filter: (node, options) => node.classList.contains('root-list-item'),
+
+        replacement: (content, node, options) => `- ${content.replace(/\n/g, '')} <br/>`
+      })
+      /**
+      * format a table of content list
+      */
+      turndownService.addRule('childList', {
+        filter: (node, options) => node.classList.contains('child-list-item'),
+
+        replacement: (content, node, options) => `\t - ${content.replace(/\n/g, '')} <br/>`.replace('[', ' [')
+      })
+
+      /**
       * Convert the method chips to in line element and
       * added a bold text
       */
       turndownService.addRule('chipsMethods', {
-        filter: (node, options) => {
-          return (
-            node.classList.contains('request-method')
-          )
-        },
+        filter: (node, options) => node.classList.contains('request-method'),
 
-        replacement: (content, node, options) => {
-          return (
+        replacement: (content, node, options) =>
             `<strong style="color:${this.getMethodColor(content)}">` + content.replace(/\n/g, '') + '</strong> - '
-          )
-        }
       })
 
       /**
