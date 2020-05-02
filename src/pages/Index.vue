@@ -14,7 +14,7 @@
             </p>
           </q-card-section>
           <q-separator inset />
-          <q-card-section>
+          <q-card-section class="q-mb-md">
             <q-file
               standout
               @input="parseJsonFile()"
@@ -36,8 +36,8 @@
             </div>
           </q-card-section>
         </q-card>
-        <q-card class="q-mt-md">
-          <q-card-section class="table-of-content">
+        <q-card class="table-of-content">
+          <q-card-section>
             <table-of-content />
           </q-card-section>
         </q-card>
@@ -190,14 +190,15 @@ export default {
       document.body.removeChild(element)
     },
     constructHtmlStrucuteForDownload (css, tableOfContent, collectionContent) {
+      const bodyClasses = document.querySelector('body').classList
       const html = `
       <html>
         <head>
         <meta charset="UTF-8">
         </head>
-        <body>
+        <body class="${bodyClasses.toString()}">
           <style>${css}</style>
-          <main class="q-page q-pa-md">
+          <main class="q-page q-pa-md q-page-container">
             <div class="row">
               <div class="col-sm-12 col-md-3">
                 ${tableOfContent}
