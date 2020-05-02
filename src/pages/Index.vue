@@ -27,12 +27,22 @@
               </template>
             </q-file>
             <div class="q-mt-md" v-if="$store.getters['collection/getIsTableContentReady']">
-            <q-btn
+            <div class="q-my-md">
+              <q-btn
               color="primary"
               label="Download in HTML"
               icon="code"
               @click="downloadHtml()"
             />
+            </div>
+            <div>
+              <q-btn
+              color="primary"
+              label="Download in Markdown"
+              icon="description"
+              @click="downloadMarkdown()"
+            />
+            </div>
             </div>
           </q-card-section>
         </q-card>
@@ -119,6 +129,7 @@ import requestDescription from 'src/components/RequestDescription'
 import requestUrl from 'src/components/RequestUrl'
 import displaySettings from 'src/components/DisplaySettings'
 import tableOfContent from 'src/components/TableOfContent'
+import TurndownService from 'turndown'
 
 export default {
   name: 'PageIndex',
@@ -166,20 +177,44 @@ export default {
     onScroll (info) {
       this.scrollInfo = info
     },
+    downloadMarkdown () {
+      var turndownService = new TurndownService()
+      const { tableOfContent, collectionContent } = this.getContentCollection()
+      const content = this.constructHtmlStrucuteForDownload('', tableOfContent, collectionContent)
+      const fileName = 'README.md'
+
+      var markdown = turndownService.turndown(content)
+      this.downloadFile(fileName, markdown)
+    },
     downloadHtml () {
+      const { tableOfContent, collectionContent, css } = this.getContentCollection()
+      const fileName = 'collection.html'
+      const content = this.constructHtmlStrucuteForDownload(css, tableOfContent, collectionContent)
+
+      this.downloadFile(fileName, content)
+    },
+    getContentCollection () {
+      /**
+       * Return HTML as string
+       **/
       const tableOfContent = document.querySelector('.table-of-content')
         .outerHTML
       const collectionContent = document.querySelector('.collection-content')
         .outerHTML
-      const fileName = 'collection.html'
       const css = this.extractCss()
-      const text = this.constructHtmlStrucuteForDownload(css, tableOfContent, collectionContent)
+
+      return { tableOfContent, collectionContent, css }
+    },
+    downloadFile (fileName, content) {
+      /**
+       * Make a string downloable, the file extension come in with the fileName param
+       */
 
       // creating an invisible element
       const element = document.createElement('a')
       element.setAttribute(
         'href',
-        'data:text/plain;charset=utf-8, ' + encodeURIComponent(text)
+        'data:text/plain;charset=utf-8, ' + encodeURIComponent(content)
       )
       element.setAttribute('download', fileName)
       // the above code is equivalent to
@@ -190,6 +225,9 @@ export default {
       document.body.removeChild(element)
     },
     constructHtmlStrucuteForDownload (css, tableOfContent, collectionContent) {
+      /**
+       * Create a logic HTML structure as string for make a downloable file
+       */
       const bodyClasses = document.querySelector('body').classList
       const html = `
       <html>
