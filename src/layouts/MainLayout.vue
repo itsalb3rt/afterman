@@ -3,11 +3,14 @@
     <q-header elevated>
       <q-toolbar class="text-primary bg-white">
         <q-btn flat dense round aria-label="Menu" />
+        <q-avatar>
+          <q-img src="~assets/mars.png" alt="mars-planet" />
+        </q-avatar>
         <q-toolbar-title>
           Afterman
         </q-toolbar-title>
 
-        <div>v{{appVersion}}</div>
+        <div>v{{ appVersion }}</div>
       </q-toolbar>
     </q-header>
 

@@ -1,4 +1,4 @@
-# Afterman :star:
+# ![Mars](https://i.ibb.co/RQvDFQP/astronomy.png) Afterman
 
 Export beutiful docs in **Markdown** and **HTML** from postman collection
 
@@ -6,6 +6,12 @@ Export beutiful docs in **Markdown** and **HTML** from postman collection
 - :wrench: No configuration
 - :fire: customize the output of your documentation *(Include Dark mode)*
 - :tada: Only HTML, CSS and Javascript (**Quasar Framework power**)
+
+## Table of content
+
+- [Rules](#Rules)
+- [Get started](#get-started)
+- [Tools for build this Web App](#tools)
 
 ## Rules
 
@@ -15,7 +21,9 @@ The collection must be exported in version 2.1 and the requests must be organize
 
 After this there is nothing else! :smile:
 
-# Get started
+---
+
+## Get started
 
 ```bash
 $ git clone https://github.com/itsalb3rt/afterman.git
@@ -37,5 +45,13 @@ $ quasar dev
 $ quasar build
 ```
 
-### Customize the configuration
-See [Configuring quasar.conf.js](https://quasar.dev/quasar-cli/quasar-conf-js).
+---
+
+## Tools
+
+Made with the :heart: and of course with these great tools
+
+- Quasar Framework  https://github.com/quasarframework/quasar
+- QMarkdown extension https://github.com/quasarframework/quasar-ui-qmarkdown
+- UniqId https://github.com/adamhalasz/uniqid
+- Turndown https://github.com/domchristie/turndown

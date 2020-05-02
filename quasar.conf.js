@@ -121,8 +121,8 @@ module.exports = function (ctx) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'Quasar App',
-        short_name: 'Quasar App',
+        name: 'Afterman',
+        short_name: 'Afterman',
         description: 'Convert postman collection in Markdown or HTML file',
         display: 'standalone',
         orientation: 'portrait',
