@@ -9,6 +9,10 @@ Export beutiful docs in **Markdown** and **HTML** from postman collection
 
 >> Note: The tool covers the basic options of a collection, variables, description, headers, body, routes, as needs arise more things will be added.
 
+### Main view
+
+![Main view](https://i.ibb.co/Qcj7Ssg/main.png)
+
 ## Table of content
 
 - [Rules](#Rules)
