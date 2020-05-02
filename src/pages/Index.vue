@@ -150,11 +150,18 @@ export default {
         fr.onload = e => {
           const result = JSON.parse(e.target.result)
           this.$store.commit('collection/SET_COLLECTION', result)
+          this.validatedCollection()
           this.$q.loading.hide()
         }
 
         fr.readAsText(this.uploadedFile)
       }, 500)
+    },
+    validatedCollection () {
+      if (!this.$store.getters['collection/isValid']) {
+        this.$q.notify({ message: 'Invalid Collection', position: 'top', color: 'negative' })
+        this.$store.commit('collection/SET_COLLECTION', this.$store.getters['collection/getCollectionModel'])
+      }
     },
     onScroll (info) {
       this.scrollInfo = info
