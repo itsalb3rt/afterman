@@ -1,6 +1,6 @@
 # ![Mars](https://i.ibb.co/RQvDFQP/astronomy.png) Afterman
 
-Export beutiful docs in **Markdown** and **HTML** from postman collection
+Export beautiful docs in **Markdown** and **HTML** from postman collection
 
 - :ghost: No Backend
 - :wrench: No configuration
