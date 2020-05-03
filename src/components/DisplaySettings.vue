@@ -1,9 +1,9 @@
 <template>
   <div>
     <q-page-sticky position="bottom-right" class="z-max" :offset="[18, 18]">
-      <q-btn fab icon="settings" color="primary" @click="toggleDialog = true" />
+      <q-btn fab icon="settings" color="primary" @click="toggleDialog" />
     </q-page-sticky>
-    <q-dialog position="right" v-model="toggleDialog">
+    <q-dialog position="right" v-model="showDialog">
       <q-card>
         <q-card-section class="row items-center q-pb-none">
           <div class="text-h6">Display settings</div>
@@ -73,13 +73,16 @@ export default {
   },
   data () {
     return {
-      toggleDialog: false,
+      showDialog: false,
       toggleLineNumbers: false,
       displayRaw: false,
       toggleDarkMode: false
     }
   },
   methods: {
+    toggleDialog () {
+      this.showDialog = !this.showDialog
+    },
     toggleDisableLineNumbers () {
       this.$store.commit(
         'displaySettings/SET_DISABLE_LINE_NUMBER',
