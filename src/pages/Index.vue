@@ -23,7 +23,7 @@
               accept=".json"
             >
               <template v-slot:prepend>
-                <q-icon name="cloud_upload" @click.stop />
+                <q-icon name="cloud_upload" />
               </template>
             </q-file>
             <div class="q-mt-md" v-if="$store.getters['collection/getIsTableContentReady']">
@@ -255,7 +255,7 @@ export default {
     },
     downloadHtml () {
       const { tableOfContent, collectionContent, css } = this.getContentCollection()
-      const fileName = 'collection.html'
+      const fileName = `${this.$store.getters['collection/getCollection'].info.name}.html`
       const content = this.constructHtmlStrucuteForDownload(css, tableOfContent, collectionContent)
 
       this.downloadFile(fileName, content)
