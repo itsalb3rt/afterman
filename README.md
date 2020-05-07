@@ -1,6 +1,6 @@
 # ![Mars](https://i.ibb.co/RQvDFQP/astronomy.png) Afterman
 
-Export beutiful docs in **Markdown** and **HTML** from postman collection
+Export beautiful docs in **Markdown** and **HTML** from postman collection
 
 - :ghost: No Backend
 - :wrench: No configuration
@@ -60,7 +60,7 @@ $ docker build -t afterman .
 ```
 
 ```bash
-$ docker run -it -p 800:80 --rm dockerize-quasar
+$ docker run -it -p 8000:80 --rm dockerize-quasar
 ```
 
 We should now be able to access the application on [http://localhost:8000](http://localhost:8000)
