@@ -72,9 +72,10 @@
             >
               <q-separator v-if="index > 0" />
               <h2 class="text-h4 q-mt-md q-mb-xs" :id="item.id">{{ item.name }}</h2>
+              <request-description v-if="item.description" :description="item.description"/>
               <div class="request">
                 <div
-                  class="request "
+                  class="request"
                   v-for="(request, requestKey) in item.item"
                   :key="requestKey"
                 >
