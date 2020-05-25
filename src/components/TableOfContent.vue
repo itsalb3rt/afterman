@@ -6,7 +6,7 @@
         <q-item v-for="(item, index) in tableOfContent" :key="index">
           <q-item-section class="text-capitalize" style="display:inline-block">
             <span class="root-list-item">
-              📁
+              <span class="caret-icon" :data-content-id="'content'+item.id" onclick="toggleContent(this.getAttribute('data-content-id'));">›</span> 📁
               <span class="text-bold">
                 <a
                   class="item text-capitalize"
@@ -16,7 +16,7 @@
                 >
               </span>
             </span>
-            <q-list separator>
+            <q-list separator :id="'content'+item.id" class="hide">
               <q-item v-for="(child, key) in item.children" :key="key">
                 <q-item-section>
                   <span class="child-list-item">
@@ -116,5 +116,14 @@ export default {
 }
 .tree a.item:hover {
   text-decoration: underline;
+}
+.caret-icon{
+  font-size: 20px;
+}
+.show{
+  display: block;
+}
+.hide{
+  display: none;
 }
 </style>
