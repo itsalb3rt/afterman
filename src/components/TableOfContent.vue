@@ -133,6 +133,7 @@ export default {
   font-size: 12px;
   padding: 2px;
   border-radius: 2px;
+  user-select: none;
 }
 .show{
   display: block;
