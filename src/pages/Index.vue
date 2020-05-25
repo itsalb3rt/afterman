@@ -131,6 +131,7 @@ import requestUrl from 'src/components/RequestUrl'
 import displaySettings from 'src/components/DisplaySettings'
 import tableOfContent from 'src/components/TableOfContent'
 import TurndownService from 'turndown'
+import { toggleContent } from 'src/assets/js/tableOfContentCollapsible.js'
 
 export default {
   name: 'PageIndex',
@@ -243,7 +244,7 @@ export default {
       })
 
       const { tableOfContent, collectionContent } = this.getContentCollection()
-      const content = this.constructHtmlStrucuteForDownload('', tableOfContent, collectionContent)
+      const content = this.constructHtmlStrucuteForDownload('', '', tableOfContent, collectionContent)
       const fileName = 'README.md'
 
       var markdown = turndownService.turndown(content)
@@ -257,7 +258,8 @@ export default {
     downloadHtml () {
       const { tableOfContent, collectionContent, css } = this.getContentCollection()
       const fileName = `${this.$store.getters['collection/getCollection'].info.name}.html`
-      const content = this.constructHtmlStrucuteForDownload(css, tableOfContent, collectionContent)
+      const javascript = toggleContent
+      const content = this.constructHtmlStrucuteForDownload(css, javascript, tableOfContent, collectionContent)
 
       this.downloadFile(fileName, content)
     },
@@ -292,7 +294,7 @@ export default {
       element.click()
       document.body.removeChild(element)
     },
-    constructHtmlStrucuteForDownload (css, tableOfContent, collectionContent) {
+    constructHtmlStrucuteForDownload (css, javascript, tableOfContent, collectionContent) {
       /**
        * Create a logic HTML structure as string for make a downloable file
        */
@@ -314,6 +316,7 @@ export default {
               </div>
             </div>
           </main>
+          <script>${javascript}\u003c/script>
         </body>
       </html>
       `
