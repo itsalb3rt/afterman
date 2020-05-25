@@ -300,10 +300,10 @@ export default {
       const html = `
       <html>
         <head>
-        <meta charset="UTF-8">
+          <meta charset="UTF-8">
+          <style>${css}</style>
         </head>
         <body class="${bodyClasses.toString()}">
-          <style>${css}</style>
           <main class="q-page q-pa-md q-page-container">
             <div class="row">
               <div class="col-sm-12 col-md-3">
