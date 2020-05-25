@@ -45,9 +45,17 @@
 
 <script>
 import uniqid from 'uniqid'
+import { toggleContent } from 'src/assets/js/tableOfContentUtil.js'
 
 export default {
   name: 'tableOfContent',
+  mounted () {
+    /**
+     * added function in window, no is a good practice but is for
+     *  reusable code for final version of documentation.
+     */
+    window.toggleContent = toggleContent
+  },
   data () {
     return {
       colors: [
