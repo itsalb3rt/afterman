@@ -6,7 +6,7 @@
         <q-item v-for="(item, index) in tableOfContent" :key="index">
           <q-item-section class="text-capitalize" style="display:inline-block">
             <span class="root-list-item">
-              <span class="caret-icon" :data-content-id="'content'+item.id" onclick="toggleContent(this.getAttribute('data-content-id'));">›</span> 📁
+              <span class="table-content-icon text-grey-7" :data-content-id="'content'+item.id" onclick="toggleContent(this.getAttribute('data-content-id'), this);">►</span> 📁
               <span class="text-bold">
                 <a
                   class="item text-capitalize"
@@ -125,8 +125,14 @@ export default {
 .tree a.item:hover {
   text-decoration: underline;
 }
-.caret-icon{
-  font-size: 20px;
+.table-content-icon:hover{
+  cursor: pointer;
+  background-color:rgba(117, 117, 117, 0.15);
+}
+.table-content-icon{
+  font-size: 12px;
+  padding: 2px;
+  border-radius: 2px;
 }
 .show{
   display: block;
