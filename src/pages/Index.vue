@@ -308,10 +308,10 @@ export default {
         <body class="${bodyClasses.toString()}">
           <main class="q-page q-pa-md q-page-container">
             <div class="row">
-              <div class="col-sm-12 col-md-3">
+              <div class="col-sm-12 col-md-3 q-mr-xs q-mt-xs">
                 ${tableOfContent}
               </div>
-              <div class="col-sm-12 col-md-9">
+              <div class="col-sm-12 col-md-8 q-mt-xs">
                 ${collectionContent}
               </div>
             </div>
