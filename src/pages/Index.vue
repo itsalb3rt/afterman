@@ -131,7 +131,7 @@ import requestUrl from 'src/components/RequestUrl'
 import displaySettings from 'src/components/DisplaySettings'
 import tableOfContent from 'src/components/TableOfContent'
 import TurndownService from 'turndown'
-import { toggleContent } from 'src/assets/js/tableOfContentCollapsible.js'
+import { toggleContent } from 'src/assets/js/tableOfContentUtil.js'
 
 export default {
   name: 'PageIndex',
