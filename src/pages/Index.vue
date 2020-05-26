@@ -86,19 +86,19 @@
                       :anchor="request.id"
                     />
                   </div>
-                  <div class="header q-my-md">
+                  <div class="header q-my-md" v-if="$store.getters['displaySettings/getDisplayRequestHeaders']">
                     <request-header :header="request.request.header" />
                   </div>
-                  <div class="url q-my-md">
+                  <div class="url q-my-md" v-if="$store.getters['displaySettings/getDisplayRequestUrl']">
                     <request-url :url="request.request.url.raw" />
                   </div>
-                  <div class="description q-my-md">
+                  <div class="description q-my-md" v-if="$store.getters['displaySettings/getDisplayRequestDescription']">
                     <request-description
                       :description="request.request.description"
                     />
                   </div>
                   <q-separator class="q-mt-md q-mb-md" />
-                  <div class="description q-my-md">
+                  <div class="description q-my-md" v-if="$store.getters['displaySettings/getDisplayRequestBody']">
                     <request-body :body="request.request.body" />
                   </div>
                   <q-separator />

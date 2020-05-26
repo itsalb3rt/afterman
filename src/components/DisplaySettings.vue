@@ -10,11 +10,8 @@
           <q-space />
           <q-btn icon="close" flat round dense v-close-popup />
         </q-card-section>
-
-        <q-card-section>
-          Controls the general display settings
-        </q-card-section>
-        <q-card-section>
+        <q-card-section class="general-settings">
+          <p class="text-bold">General</p>
           <div>
             <q-toggle
               @input="toggleDisableLineNumbers()"
@@ -30,8 +27,46 @@
             ></q-toggle>
           </div>
           <div>
-            <q-separator class="q-my-md" />
+            <q-separator class="q-mt-md" />
           </div>
+        </q-card-section>
+        <q-card-section class="content-settings">
+          <div>
+            <p class="text-bold">Content</p>
+          </div>
+          <div>
+            <q-toggle
+              @input="toggleDisplayRequestHeaders()"
+              v-model="displayRequestHeaders"
+              label="Display Headers"
+            ></q-toggle>
+          </div>
+          <div>
+            <q-toggle
+              @input="toggleDisplayRequestUrl()"
+              v-model="displayRequestUrl"
+              label="Display URL"
+            ></q-toggle>
+          </div>
+          <div>
+            <q-toggle
+              @input="toggleDisplayRequestDescription()"
+              v-model="displayRequestDescription"
+              label="Display Description"
+            ></q-toggle>
+          </div>
+          <div>
+            <q-toggle
+              @input="toggleDisplayRequestBody()"
+              v-model="displayRequestBody"
+              label="Display Body"
+            ></q-toggle>
+          </div>
+          <div>
+            <q-separator class="q-mt-md" />
+          </div>
+        </q-card-section>
+        <q-card-section>
           <div>
             <q-btn
               @click="displayRaw = true"
@@ -51,11 +86,11 @@
           <q-btn icon="close" flat round dense v-close-popup />
         </q-card-section>
         <q-card-section>
-<q-markdown>
-```json
-{{$store.getters['collection/getCollection']}}
-```
-</q-markdown>
+          <q-markdown>
+            ```json
+            {{ $store.getters["collection/getCollection"] }}
+            ```
+          </q-markdown>
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -69,6 +104,18 @@ export default {
     this.toggleLineNumbers = this.$store.getters[
       'displaySettings/getDisableLineNumbers'
     ]
+    this.displayRequestHeaders = this.$store.getters[
+      'displaySettings/getDisplayRequestHeaders'
+    ]
+    this.displayRequestUrl = this.$store.getters[
+      'displaySettings/getDisplayRequestUrl'
+    ]
+    this.displayRequestDescription = this.$store.getters[
+      'displaySettings/getDisplayRequestDescription'
+    ]
+    this.displayRequestBody = this.$store.getters[
+      'displaySettings/getDisplayRequestBody'
+    ]
     this.toggleDarkMode = this.$q.dark.isActive
   },
   data () {
@@ -76,7 +123,11 @@ export default {
       showDialog: false,
       toggleLineNumbers: false,
       displayRaw: false,
-      toggleDarkMode: false
+      toggleDarkMode: false,
+      displayRequestHeaders: true,
+      displayRequestDescription: true,
+      displayRequestBody: true,
+      displayRequestUrl: true
     }
   },
   methods: {
@@ -87,6 +138,30 @@ export default {
       this.$store.commit(
         'displaySettings/SET_DISABLE_LINE_NUMBER',
         this.toggleLineNumbers
+      )
+    },
+    toggleDisplayRequestHeaders () {
+      this.$store.commit(
+        'displaySettings/SET_DISPLAY_REQUEST_HEADERS',
+        this.displayRequestHeaders
+      )
+    },
+    toggleDisplayRequestUrl () {
+      this.$store.commit(
+        'displaySettings/SET_DISPLAY_REQUEST_URL',
+        this.displayRequestUrl
+      )
+    },
+    toggleDisplayRequestDescription () {
+      this.$store.commit(
+        'displaySettings/SET_DISPLAY_REQUEST_DESCRIPTION',
+        this.displayRequestDescription
+      )
+    },
+    toggleDisplayRequestBody () {
+      this.$store.commit(
+        'displaySettings/SET_DISPLAY_REQUEST_BODY',
+        this.displayRequestBody
       )
     },
     darkMode () {
