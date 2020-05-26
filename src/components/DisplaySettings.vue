@@ -43,20 +43,21 @@
           </div>
           <div>
             <q-toggle
-            @input="toggleDisplayRequestUrl()"
+              @input="toggleDisplayRequestUrl()"
               v-model="displayRequestUrl"
               label="Display URL"
             ></q-toggle>
           </div>
           <div>
             <q-toggle
-            @input="toggleDisplayRequestDescription()"
+              @input="toggleDisplayRequestDescription()"
               v-model="displayRequestDescription"
               label="Display Description"
             ></q-toggle>
           </div>
           <div>
             <q-toggle
+              @input="toggleDisplayRequestBody()"
               v-model="displayRequestBody"
               label="Display Body"
             ></q-toggle>
@@ -112,6 +113,9 @@ export default {
     this.displayRequestDescription = this.$store.getters[
       'displaySettings/getDisplayRequestDescription'
     ]
+    this.displayRequestBody = this.$store.getters[
+      'displaySettings/getDisplayRequestBody'
+    ]
     this.toggleDarkMode = this.$q.dark.isActive
   },
   data () {
@@ -152,6 +156,12 @@ export default {
       this.$store.commit(
         'displaySettings/SET_DISPLAY_REQUEST_DESCRIPTION',
         this.displayRequestDescription
+      )
+    },
+    toggleDisplayRequestBody () {
+      this.$store.commit(
+        'displaySettings/SET_DISPLAY_REQUEST_BODY',
+        this.displayRequestBody
       )
     },
     darkMode () {
