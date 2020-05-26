@@ -86,7 +86,7 @@
                       :anchor="request.id"
                     />
                   </div>
-                  <div class="header q-my-md">
+                  <div class="header q-my-md" v-if="$store.getters['displaySettings/getDisplayRequestHeaders']">
                     <request-header :header="request.request.header" />
                   </div>
                   <div class="url q-my-md">
