@@ -43,6 +43,7 @@
           </div>
           <div>
             <q-toggle
+            @input="toggleDisplayRequestUrl()"
               v-model="displayRequestUrl"
               label="Display URL"
             ></q-toggle>
@@ -104,6 +105,9 @@ export default {
     this.displayRequestHeaders = this.$store.getters[
       'displaySettings/getDisplayRequestHeaders'
     ]
+    this.displayRequestUrl = this.$store.getters[
+      'displaySettings/getDisplayRequestUrl'
+    ]
     this.toggleDarkMode = this.$q.dark.isActive
   },
   data () {
@@ -132,6 +136,12 @@ export default {
       this.$store.commit(
         'displaySettings/SET_DISPLAY_REQUEST_HEADERS',
         this.displayRequestHeaders
+      )
+    },
+    toggleDisplayRequestUrl () {
+      this.$store.commit(
+        'displaySettings/SET_DISPLAY_REQUEST_URL',
+        this.displayRequestUrl
       )
     },
     darkMode () {
