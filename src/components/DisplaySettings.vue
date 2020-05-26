@@ -36,7 +36,7 @@
           </div>
           <div>
             <q-toggle
-              @input="toggleDisplayHeaders()"
+              @input="toggleDisplayRequestHeaders()"
               v-model="displayRequestHeaders"
               label="Display Headers"
             ></q-toggle>
@@ -132,7 +132,7 @@ export default {
         this.toggleLineNumbers
       )
     },
-    toggleDisplayHeaders () {
+    toggleDisplayRequestHeaders () {
       this.$store.commit(
         'displaySettings/SET_DISPLAY_REQUEST_HEADERS',
         this.displayRequestHeaders
