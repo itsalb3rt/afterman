@@ -98,7 +98,7 @@
                     />
                   </div>
                   <q-separator class="q-mt-md q-mb-md" />
-                  <div class="description q-my-md">
+                  <div class="description q-my-md" v-if="$store.getters['displaySettings/getDisplayRequestBody']">
                     <request-body :body="request.request.body" />
                   </div>
                   <q-separator />
