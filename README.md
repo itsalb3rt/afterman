@@ -34,6 +34,7 @@ After this there is nothing else! :smile:
 
 ```bash
 $ git clone https://github.com/itsalb3rt/afterman.git
+$ cd afterman
 ```
 
 ### Install the dependencies
@@ -60,7 +61,7 @@ $ docker build -t afterman .
 ```
 
 ```bash
-$ docker run -it -p 8000:80 --rm dockerize-quasar
+$ docker run -d --name afterman -p 8000:80 --rm afterman
 ```
 
 We should now be able to access the application on [http://localhost:8000](http://localhost:8000)
