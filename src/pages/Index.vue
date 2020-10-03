@@ -46,14 +46,14 @@
             </div>
           </q-card-section>
         </q-card>
-        <q-card class="table-of-content">
+        <q-card v-if="isJsonLoaded" class="table-of-content">
           <q-card-section>
             <table-of-content />
           </q-card-section>
         </q-card>
       </div>
       <div class="col-sm-12 col-md-7">
-        <q-card class="collection-content">
+        <q-card v-if="isJsonLoaded" class="collection-content">
           <q-card-section>
             <collection-description
               :info="this.$store.getters['collection/getCollection'].info"
@@ -158,6 +158,11 @@ export default {
         { method: 'PATCH', value: '#9e9e9e' },
         { method: 'DELETE', value: '#C10015' }
       ]
+    }
+  },
+  computed: {
+    isJsonLoaded () {
+      return this.$store.getters['collection/getCollection'].item.length !== 0
     }
   },
   methods: {
