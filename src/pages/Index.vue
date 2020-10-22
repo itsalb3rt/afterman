@@ -10,7 +10,7 @@
               <span class="text-bold">.json</span> format. Remember that you
               must export the file from postman, right click on the collection
               -> export ->
-              <span class="text-bold">Collection 2.1 (recomend)</span>
+              <span class="text-bold">Collection v2.1 (recommended)</span>
             </p>
           </q-card-section>
           <q-separator inset />
