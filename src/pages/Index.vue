@@ -156,6 +156,7 @@ export default {
         { method: 'POST', value: '#1976D2' },
         { method: 'GET', value: '#21BA45' },
         { method: 'PATCH', value: '#9e9e9e' },
+        { method: 'PUT', value: '#9e9e9e' },
         { method: 'DELETE', value: '#C10015' }
       ]
     }
@@ -258,7 +259,7 @@ export default {
     getMethodColor (method) {
       method = method.replace(/\n/g, '').trim()
       const result = this.methodsColors.find(color => color.method === method.toUpperCase())
-      return result.value
+      return result ? result.value : '#9C27B0'
     },
     downloadHtml () {
       const { tableOfContent, collectionContent, css } = this.getContentCollection()
