@@ -2,7 +2,7 @@
   <div>
     <p class="text-h6">Body</p>
     <q-markdown v-if="body" :no-line-numbers="$store.getters['displaySettings/getDisableLineNumbers']">
-```{{body.options.raw.language}}
+```{{getBodyLanguage(body.options)}}
 {{parseBody(body.raw)}}
 ```
     </q-markdown>
@@ -19,6 +19,12 @@ export default {
   methods: {
     parseBody (body) {
       return body.toString()
+    },
+    getBodyLanguage (options) {
+      if (options) {
+        return options.raw.language
+      }
+      return 'json'
     }
   }
 }
