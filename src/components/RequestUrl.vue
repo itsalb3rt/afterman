@@ -18,10 +18,12 @@ export default {
   methods: {
     setUrlVars (url) {
       const urlVars = url.match(/({{[a-zA-Z]+}})/)
-      urlVars.forEach(element => {
-        const result = this.$store.getters['collection/getCollectionVariables'].find(item => item.key === element.replace(/({{)|(}})/g, ''))
-        url = url.replace(`{{${result.key}}}`, result.value)
-      })
+      if (urlVars) {
+        urlVars.forEach(element => {
+          const result = this.$store.getters['collection/getCollectionVariables'].find(item => item.key === element.replace(/({{)|(}})/g, ''))
+          url = url.replace(`{{${result.key}}}`, result.value)
+        })
+      }
       return url
     }
   }
