@@ -18,7 +18,10 @@ export default {
   },
   methods: {
     parseBody (body) {
-      return body.toString()
+      if (typeof body === 'string') {
+        return body.toString()
+      }
+      return ''
     },
     getBodyLanguage (options) {
       if (options) {
