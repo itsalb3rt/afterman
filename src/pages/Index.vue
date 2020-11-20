@@ -223,7 +223,7 @@ export default {
       })
 
       /**
-       * Keep the html tag headers for use anchors
+      * Keep the html tag headers for use anchors
       */
       turndownService.addRule('keepHeadersTags', {
         filter: (node, options) => {
@@ -287,8 +287,8 @@ export default {
     },
     getContentCollection () {
       /**
-       * Return HTML as string
-       **/
+      * Return HTML as string
+      **/
       const tableOfContent = document.querySelector('.table-of-content')
         .outerHTML
       const collectionContent = document.querySelector('.collection-content')
@@ -299,8 +299,8 @@ export default {
     },
     downloadFile (fileName, content) {
       /**
-       * Make a string downloable, the file extension come in with the fileName param
-       */
+      * Make a string downloable, the file extension come in with the fileName param
+      */
 
       // creating an invisible element
       const element = document.createElement('a')
@@ -318,8 +318,8 @@ export default {
     },
     constructHtmlStrucuteForDownload (css, javascript, tableOfContent, collectionContent) {
       /**
-       * Create a logic HTML structure as string for make a downloable file
-       */
+      * Create a logic HTML structure as string for make a downloable file
+      */
       const bodyClasses = document.querySelector('body').classList
       const html = `
       <html>
