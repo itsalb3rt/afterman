@@ -200,7 +200,7 @@ export default {
       turndownService.addRule('rootList', {
         filter: (node, options) => node.classList.contains('root-list-item'),
 
-        replacement: (content, node, options) => `- ${content.replace(/\n/g, '')} <br/>`
+        replacement: (content, node, options) => `- <details><summary>${content.replace(/\n/g, '')} </summary>`.replace('►', '')
       })
       /**
       * format a table of content list
@@ -208,7 +208,7 @@ export default {
       turndownService.addRule('childList', {
         filter: (node, options) => node.classList.contains('child-list-item'),
 
-        replacement: (content, node, options) => `\t - ${content.replace(/\n/g, '')} <br/>`.replace('[', ' [')
+        replacement: (content, node, options) => `\t - ${content.replace(/\n/g, '')} <br/> \n\n`.replace('[', ' [')
       })
 
       /**
@@ -223,8 +223,8 @@ export default {
       })
 
       /**
-       * Keep the html tag headers for use anchors
-       */
+      * Keep the html tag headers for use anchors
+      */
       turndownService.addRule('keepHeadersTags', {
         filter: (node, options) => {
           return (
@@ -243,6 +243,22 @@ export default {
         filter: (node, options) => {
           return (
             node.classList.contains('request-name')
+          )
+        },
+
+        replacement: (content, node, options) => node.outerHTML
+      })
+
+      /**
+      * Keep HTML tag for 'a href' for use content list
+      */
+      turndownService.addRule('keepRootListTags', {
+
+        filter: (node, options) => {
+          return (
+            node.nodeName === 'A' &&
+            node.classList.contains('item') &&
+            node.classList.contains('text-capitalize')
           )
         },
 
@@ -271,8 +287,8 @@ export default {
     },
     getContentCollection () {
       /**
-       * Return HTML as string
-       **/
+      * Return HTML as string
+      **/
       const tableOfContent = document.querySelector('.table-of-content')
         .outerHTML
       const collectionContent = document.querySelector('.collection-content')
@@ -283,8 +299,8 @@ export default {
     },
     downloadFile (fileName, content) {
       /**
-       * Make a string downloable, the file extension come in with the fileName param
-       */
+      * Make a string downloable, the file extension come in with the fileName param
+      */
 
       // creating an invisible element
       const element = document.createElement('a')
@@ -302,8 +318,8 @@ export default {
     },
     constructHtmlStrucuteForDownload (css, javascript, tableOfContent, collectionContent) {
       /**
-       * Create a logic HTML structure as string for make a downloable file
-       */
+      * Create a logic HTML structure as string for make a downloable file
+      */
       const bodyClasses = document.querySelector('body').classList
       const html = `
       <html>
