@@ -200,7 +200,7 @@ export default {
       turndownService.addRule('rootList', {
         filter: (node, options) => node.classList.contains('root-list-item'),
 
-        replacement: (content, node, options) => `- ${content.replace(/\n/g, '')} <br/>`
+        replacement: (content, node, options) => `- <details><summary>${content.replace(/\n/g, '')} </summary>`.replace('►', '')
       })
       /**
       * format a table of content list
@@ -208,7 +208,7 @@ export default {
       turndownService.addRule('childList', {
         filter: (node, options) => node.classList.contains('child-list-item'),
 
-        replacement: (content, node, options) => `\t - ${content.replace(/\n/g, '')} <br/>`.replace('[', ' [')
+        replacement: (content, node, options) => `\t - ${content.replace(/\n/g, '')} <br/> \n\n`.replace('[', ' [')
       })
 
       /**
@@ -224,7 +224,7 @@ export default {
 
       /**
        * Keep the html tag headers for use anchors
-       */
+      */
       turndownService.addRule('keepHeadersTags', {
         filter: (node, options) => {
           return (
@@ -243,6 +243,22 @@ export default {
         filter: (node, options) => {
           return (
             node.classList.contains('request-name')
+          )
+        },
+
+        replacement: (content, node, options) => node.outerHTML
+      })
+
+      /**
+      * Keep HTML tag for 'a href' for use content list
+      */
+      turndownService.addRule('keepRootListTags', {
+
+        filter: (node, options) => {
+          return (
+            node.nodeName === 'A' &&
+            node.classList.contains('item') &&
+            node.classList.contains('text-capitalize')
           )
         },
 
