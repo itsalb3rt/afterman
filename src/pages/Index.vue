@@ -131,7 +131,7 @@ import requestUrl from 'src/components/RequestUrl'
 import displaySettings from 'src/components/DisplaySettings'
 import tableOfContent from 'src/components/TableOfContent'
 import TurndownService from 'turndown'
-import { toggleContent } from 'src/assets/js/tableOfContentUtil.js'
+import { inmutableToggleContent } from 'src/assets/js/tableOfContentUtil.js'
 
 export default {
   name: 'PageIndex',
@@ -280,7 +280,7 @@ export default {
     downloadHtml () {
       const { tableOfContent, collectionContent, css } = this.getContentCollection()
       const fileName = `${this.$store.getters['collection/getCollection'].info.name}.html`
-      const javascript = toggleContent
+      const javascript = inmutableToggleContent
       const content = this.constructHtmlStrucuteForDownload(css, javascript, tableOfContent, collectionContent)
 
       this.downloadFile(fileName, content)
