@@ -7,6 +7,8 @@
 // https://quasar.dev/quasar-cli/quasar-conf-js
 /* eslint-env node */
 
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+
 module.exports = function (ctx) {
   return {
     // app boot file (/src/boot)
@@ -97,6 +99,17 @@ module.exports = function (ctx) {
             formatter: require('eslint').CLIEngine.getFormatter('stylish')
           }
         })
+        cfg.plugins.push(
+          new UglifyJsPlugin({
+            chunkFilter: (chunk) => {
+              // Exclude uglification for the `vendor` chunk
+              if (chunk.name === 'vendor') {
+                return false
+              }
+              return true
+            }
+          })
+        )
       }
     },
 
