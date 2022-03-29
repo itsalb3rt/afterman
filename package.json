@@ -21,7 +21,7 @@
     "vue-i18n": "^8.0.0"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.0",
+    "@quasar/app": "^1.9.6",
     "@quasar/quasar-app-extension-qmarkdown": "^1.0.24",
     "babel-eslint": "^10.0.1",
     "eslint": "^6.8.0",
