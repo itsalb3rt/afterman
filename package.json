@@ -14,7 +14,7 @@
     "build": "quasar build"
   },
   "dependencies": {
-    "@quasar/extras": "^1.13.5",
+    "@quasar/extras": "^1.13.6",
     "quasar": "^1.18.7",
     "turndown": "^6.0.0",
     "uniqid": "^5.4.0",
