@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.13.6",
-    "quasar": "^1.18.7",
+    "quasar": "^1.18.10",
     "turndown": "^6.0.0",
     "uniqid": "^5.4.0",
     "vue-i18n": "^8.27.1"
