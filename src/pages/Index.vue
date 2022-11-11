@@ -90,7 +90,7 @@
                     <request-header :header="request.request.header" />
                   </div>
                   <div class="url q-my-md" v-if="$store.getters['displaySettings/getDisplayRequestUrl']">
-                    <request-url :url="request.request.url.raw" />
+                    <request-url v-if="request.request.url" :url="request.request.url.raw" />
                   </div>
                   <div class="description q-my-md" v-if="$store.getters['displaySettings/getDisplayRequestDescription']">
                     <request-description
